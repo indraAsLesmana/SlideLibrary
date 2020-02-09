@@ -13,46 +13,40 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.indra.slide.interfaces
 
-package com.indra.slide.interfaces;
-
-import java.io.IOException;
-import java.lang.reflect.Type;
-import java.util.HashMap;
-
-import okhttp3.RequestBody;
-import okhttp3.ResponseBody;
+import okhttp3.RequestBody
+import okhttp3.ResponseBody
+import java.io.IOException
+import java.lang.reflect.Type
+import java.util.*
 
 /**
  * Created by indra953@gmail.com on 2020-02-08.
  */
-
-public interface Parser<F, T> {
-
-    T convert(F value) throws IOException;
+interface Parser<F, T> {
+    @Throws(IOException::class)
+    fun convert(value: F): T
 
     abstract class Factory {
-
-        public Parser<ResponseBody, ?> responseBodyParser(Type type) {
-            return null;
+        open fun responseBodyParser(type: Type?): Parser<ResponseBody?, *>? {
+            return null
         }
 
-        public Parser<?, RequestBody> requestBodyParser(Type type) {
-            return null;
+        open fun requestBodyParser(type: Type?): Parser<*, RequestBody?>? {
+            return null
         }
 
-        public Object getObject(String string, Type type) {
-            return null;
+        open fun getObject(string: String?, type: Type?): Any? {
+            return null
         }
 
-        public String getString(Object object) {
-            return null;
+        open fun getString(`object`: Any?): String? {
+            return null
         }
 
-        public HashMap<String, String> getStringMap(Object object) {
-            return null;
+        open fun getStringMap(`object`: Any?): HashMap<String?, String?>? {
+            return null
         }
-
     }
-
 }

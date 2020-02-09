@@ -13,20 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.indra.slide.core
 
-package com.indra.slide.core;
-
-import java.util.concurrent.Executor;
+import java.util.concurrent.Executor
 
 /**
  * Created by indra953@gmail.com on 2020-02-08.
  */
-
-public interface ExecutorSupplier {
-
-    ANExecutor forNetworkTasks();
-
-    ANExecutor forImmediateNetworkTasks();
-
-    Executor forMainThreadTasks();
+interface ExecutorSupplier {
+    fun forNetworkTasks(): ANExecutor?
+    fun forImmediateNetworkTasks(): ANExecutor?
+    fun forMainThreadTasks(): Executor?
 }

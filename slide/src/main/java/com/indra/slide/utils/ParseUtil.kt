@@ -13,24 +13,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.indra.slide.utils
 
-package com.indra.slide.core;
-
-import android.os.Handler;
-import android.os.Looper;
-
-import java.util.concurrent.Executor;
+import com.google.gson.Gson
+import com.indra.slide.gsonparserfactory.GsonParserFactory
+import com.indra.slide.interfaces.Parser
 
 /**
  * Created by indra953@gmail.com on 2020-02-08.
  */
 
-public class MainThreadExecutor implements Executor {
+object ParseUtil {
+    private var mParserFactory: Parser.Factory? = null
 
-    private final Handler handler = new Handler(Looper.getMainLooper());
+    @JvmStatic
+    var parserFactory: Parser.Factory?
+        get() {
+            if (mParserFactory == null) {
+                mParserFactory = GsonParserFactory(Gson())
+            }
+            return mParserFactory
+        }
+        set(parserFactory) {
+            mParserFactory = parserFactory
+        }
 
-    @Override
-    public void execute(Runnable runnable) {
-        handler.post(runnable);
+    @JvmStatic
+    fun shutDown() {
+        mParserFactory = null
     }
 }

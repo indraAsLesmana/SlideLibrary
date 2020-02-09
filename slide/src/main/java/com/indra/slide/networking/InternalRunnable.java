@@ -115,40 +115,6 @@ public class InternalRunnable implements Runnable {
         }
     }
 
-    /*private void executeUploadRequest() {
-        Response okHttpResponse = null;
-        try {
-            okHttpResponse = InternalNetworking.performUploadRequest(request);
-
-            if (okHttpResponse == null) {
-                deliverError(request, Utils.getErrorForConnection(new ANError()));
-                return;
-            }
-
-            if (request.getResponseAs() == ResponseType.OK_HTTP_RESPONSE) {
-                request.deliverOkHttpResponse(okHttpResponse);
-                return;
-            }
-
-            if (okHttpResponse.code() >= 400) {
-                deliverError(request, Utils.getErrorForServerResponse(new ANError(okHttpResponse),
-                        request, okHttpResponse.code()));
-                return;
-            }
-            ANResponse response = request.parseResponse(okHttpResponse);
-            if (!response.isSuccess()) {
-                deliverError(request, response.getError());
-                return;
-            }
-            response.setOkHttpResponse(okHttpResponse);
-            request.deliverResponse(response);
-        } catch (Exception e) {
-            deliverError(request, Utils.getErrorForConnection(new ANError(e)));
-        } finally {
-            SourceCloseUtil.close(okHttpResponse, request);
-        }
-    }*/
-
     public Priority getPriority() {
         return priority;
     }

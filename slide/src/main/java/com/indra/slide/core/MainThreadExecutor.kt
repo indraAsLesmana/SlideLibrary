@@ -13,9 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.indra.slide.model
+package com.indra.slide.core
+
+import android.os.Handler
+import android.os.Looper
+import java.util.concurrent.Executor
 
 /**
  * Created by indra953@gmail.com on 2020-02-08.
  */
-class MultipartStringBody(val value: String, val contentType: String)
+class MainThreadExecutor : Executor {
+    private val handler = Handler(Looper.getMainLooper())
+    override fun execute(runnable: Runnable) {
+        handler.post(runnable)
+    }
+}

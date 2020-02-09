@@ -13,40 +13,38 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-package com.indra.slide.core;
+package com.indra.slide.core
 
 /**
  * Created by indra953@gmail.com on 2020-02-08.
  */
+class Core private constructor() {
+    val executorSupplier: ExecutorSupplier
 
-public class Core {
-
-    private static Core sInstance = null;
-    private final ExecutorSupplier mExecutorSupplier;
-
-    private Core() {
-        this.mExecutorSupplier = new DefaultExecutorSupplier();
-    }
-
-    public static Core getInstance() {
-        if (sInstance == null) {
-            synchronized (Core.class) {
+    companion object {
+        private var sInstance: Core? = null
+        @JvmStatic
+        val instance: Core?
+            get() {
                 if (sInstance == null) {
-                    sInstance = new Core();
+                    synchronized(Core::class.java) {
+                        if (sInstance == null) {
+                            sInstance = Core()
+                        }
+                    }
                 }
+                return sInstance
+            }
+
+        @JvmStatic
+        fun shutDown() {
+            if (sInstance != null) {
+                sInstance = null
             }
         }
-        return sInstance;
     }
 
-    public ExecutorSupplier getExecutorSupplier() {
-        return mExecutorSupplier;
-    }
-
-    public static void shutDown() {
-        if (sInstance != null) {
-            sInstance = null;
-        }
+    init {
+        executorSupplier = DefaultExecutorSupplier()
     }
 }

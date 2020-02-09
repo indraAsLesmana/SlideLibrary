@@ -633,8 +633,8 @@ public class ANRequest<T extends ANRequest> {
         try {
             if (anError.getResponse() != null && anError.getResponse().body() != null
                     && anError.getResponse().body().source() != null) {
-                anError.setErrorBody(Okio.buffer(anError
-                        .getResponse().body().source()).readUtf8());
+                anError.errorBody = Okio.buffer(anError
+                        .getResponse().body().source()).readUtf8();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -647,7 +647,7 @@ public class ANRequest<T extends ANRequest> {
             if (!isDelivered) {
                 if (isCancelled) {
                     anError.setCancellationMessageInError();
-                    anError.setErrorCode(0);
+                    anError.errorCode = 0;
                 }
                 deliverErrorResponse(anError);
             }
@@ -679,7 +679,7 @@ public class ANRequest<T extends ANRequest> {
             } else {
                 ANError anError = new ANError();
                 anError.setCancellationMessageInError();
-                anError.setErrorCode(0);
+                anError.errorCode = 0;
                 deliverErrorResponse(anError);
                 finish();
             }
@@ -768,7 +768,7 @@ public class ANRequest<T extends ANRequest> {
             } else {
                 ANError anError = new ANError();
                 anError.setCancellationMessageInError();
-                anError.setErrorCode(0);
+                anError.errorCode = 0;
                 if (mOkHttpResponseListener != null) {
                     mOkHttpResponseListener.onError(anError);
                 }

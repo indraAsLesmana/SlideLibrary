@@ -30,8 +30,9 @@ import okhttp3.Response;
 import static com.indra.slide.common.RequestType.*;
 
 /**
- * Created by amitshekhar on 14/09/16.
+ * Created by indra953@gmail.com on 2020-02-08.
  */
+
 @SuppressWarnings("unchecked")
 public final class SynchronousCall {
 
@@ -45,8 +46,6 @@ public final class SynchronousCall {
                 return executeSimpleRequest(request);
             case DOWNLOAD:
                 return executeDownloadRequest(request);
-            /*case MULTIPART:
-                return executeUploadRequest(request);*/
         }
         return new ANResponse<>(new ANError());
     }
@@ -104,36 +103,4 @@ public final class SynchronousCall {
             return new ANResponse<>(Utils.getErrorForConnection(new ANError(e)));
         }
     }
-
-    /*private static <T> ANResponse<T> executeUploadRequest(ANRequest request) {
-        Response okHttpResponse = null;
-        try {
-            okHttpResponse = InternalNetworking.performUploadRequest(request);
-
-            if (okHttpResponse == null) {
-                return new ANResponse<>(Utils.getErrorForConnection(new ANError()));
-            }
-
-            if (request.getResponseAs() == ResponseType.OK_HTTP_RESPONSE) {
-                ANResponse response = new ANResponse(okHttpResponse);
-                response.setOkHttpResponse(okHttpResponse);
-                return response;
-            }
-            if (okHttpResponse.code() >= 400) {
-                ANResponse response = new ANResponse<>(Utils.getErrorForServerResponse(new ANError(okHttpResponse),
-                        request, okHttpResponse.code()));
-                response.setOkHttpResponse(okHttpResponse);
-                return response;
-            }
-            ANResponse response = request.parseResponse(okHttpResponse);
-            response.setOkHttpResponse(okHttpResponse);
-            return response;
-        } catch (ANError se) {
-            return new ANResponse<>(Utils.getErrorForConnection(se));
-        } catch (Exception e) {
-            return new ANResponse<>(Utils.getErrorForConnection(new ANError(e)));
-        } finally {
-            SourceCloseUtil.close(okHttpResponse, request);
-        }
-    }*/
 }

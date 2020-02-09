@@ -13,33 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.indra.slide.core
 
-package com.indra.slide.utils;
-
-
-import com.indra.slide.common.ANRequest;
-import com.indra.slide.common.ResponseType;
-
-import okhttp3.Response;
+import android.os.Process
+import java.util.concurrent.ThreadFactory
 
 /**
  * Created by indra953@gmail.com on 2020-02-08.
  */
-
-public final class SourceCloseUtil {
-
-    private SourceCloseUtil() {
-    }
-
-    public static void close(Response response, ANRequest request) {
-        if (request.getResponseAs() != ResponseType.OK_HTTP_RESPONSE &&
-                response != null && response.body() != null &&
-                response.body().source() != null) {
+class PriorityThreadFactory(private val mThreadPriority: Int) : ThreadFactory {
+    override fun newThread(runnable: Runnable): Thread {
+        val wrapperRunnable = Runnable {
             try {
-                response.body().source().close();
-            } catch (Exception ignore) {
-
+                Process.setThreadPriority(mThreadPriority)
+            } catch (t: Throwable) {
             }
+            runnable.run()
         }
+        return Thread(wrapperRunnable)
     }
+
 }

@@ -13,11 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.indra.slide.model
+package com.indra.slide.utils
 
-import java.io.File
+import com.indra.slide.common.ANRequest
+import com.indra.slide.common.ResponseType
+import okhttp3.Response
 
 /**
  * Created by indra953@gmail.com on 2020-02-08.
  */
-class MultipartFileBody(val file: File, val contentType: String)
+object SourceCloseUtil {
+    @JvmStatic
+    fun close(response: Response?, request: ANRequest<*>) {
+        if (request.responseAs !== ResponseType.OK_HTTP_RESPONSE && response != null && response.body() != null && response.body()!!.source() != null
+        ) {
+            try {
+                response.body()!!.source().close()
+            } catch (ignore: Exception) {
+            }
+        }
+    }
+}

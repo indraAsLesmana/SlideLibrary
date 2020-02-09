@@ -92,22 +92,6 @@ public class Slide {
     }
 
     /**
-     * Method to set connectionQualityChangeListener
-     *
-     * @param connectionChangeListener The connectionQualityChangeListener
-     *//*
-    public static void setConnectionQualityChangeListener(ConnectionQualityChangeListener connectionChangeListener) {
-        ConnectionClassManager.getInstance().setListener(connectionChangeListener);
-    }
-
-    *//**
-     * Method to set connectionQualityChangeListener
-     *//*
-    public static void removeConnectionQualityChangeListener() {
-        ConnectionClassManager.getInstance().removeListener();
-    }*/
-
-    /**
      * Method to make GET request
      *
      * @param url The url on which request is to be made
@@ -190,16 +174,6 @@ public class Slide {
     }
 
     /**
-     * Method to make upload request
-     *
-     * @param url The url on which request is to be made
-     * @return The MultiPartBuilder
-     */
-    /*public static ANRequest.MultiPartBuilder upload(String url) {
-        return new ANRequest.MultiPartBuilder(url);
-    }*/
-
-    /**
      * Method to make Dynamic request
      *
      * @param url    The url on which request is to be made
@@ -243,22 +217,6 @@ public class Slide {
     }
 
     /**
-     * Method to enable logging
-     */
-    /*public static void enableLogging() {
-        enableLogging(Level.BASIC);
-    }*/
-
-    /**
-     * Method to enable logging with tag
-     *
-     * @param level The level for logging
-     */
-    /*public static void enableLogging(Level level) {
-        InternalNetworking.enableLogging(level);
-    }*/
-
-    /**
      * Method to evict a bitmap with given key from LruCache
      *
      * @param key The key of the bitmap
@@ -290,24 +248,6 @@ public class Slide {
     }
 
     /**
-     * Method to get currentBandwidth
-     *
-     * @return currentBandwidth
-     */
-    /*public static int getCurrentBandwidth() {
-        return ConnectionClassManager.getInstance().getCurrentBandwidth();
-    }*/
-
-    /**
-     * Method to get currentConnectionQuality
-     *
-     * @return currentConnectionQuality
-     */
-    /*public static ConnectionQuality getCurrentConnectionQuality() {
-        return ConnectionClassManager.getInstance().getCurrentConnectionQuality();
-    }*/
-
-    /**
      * Method to set ParserFactory
      *
      * @param parserFactory The ParserFactory
@@ -332,8 +272,6 @@ public class Slide {
     public static void shutDown() {
         Core.shutDown();
         evictAllBitmap();
-        //ConnectionClassManager.getInstance().removeListener();
-        //ConnectionClassManager.shutDown();
         ParseUtil.shutDown();
     }
 }
