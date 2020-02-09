@@ -67,7 +67,7 @@ class ANError : Exception {
         try {
             return ParseUtil
                 .parserFactory
-                .getObject(errorBody, objectClass) as T
+                ?.getObject(errorBody, objectClass) as T
         } catch (e: Exception) {
             e.printStackTrace()
         }

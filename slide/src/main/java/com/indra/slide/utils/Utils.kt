@@ -66,6 +66,7 @@ object Utils {
         return contentTypeFor
     }
 
+    @JvmStatic
     fun decodeBitmap(
         response: Response, maxWidth: Int,
         maxHeight: Int, decodeConfig: Bitmap.Config?,
